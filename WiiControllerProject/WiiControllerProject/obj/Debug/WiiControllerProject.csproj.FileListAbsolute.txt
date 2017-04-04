@@ -1,0 +1,15 @@
+C:\DataCom\WiiControllerProject\WiiControllerProject\bin\Debug\WiiControllerProject.exe.config
+C:\DataCom\WiiControllerProject\WiiControllerProject\bin\Debug\WiiControllerProject.exe
+C:\DataCom\WiiControllerProject\WiiControllerProject\bin\Debug\WiiControllerProject.pdb
+C:\DataCom\WiiControllerProject\WiiControllerProject\bin\Debug\WII.HID.Lib.dll
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.csprojResolveAssemblyReference.cache
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\MainWindow.g.cs
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\App.g.cs
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject_MarkupCompile.cache
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject_MarkupCompile.lref
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\MainWindow.baml
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.g.resources
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.Properties.Resources.resources
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.csproj.GenerateResource.Cache
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.exe
+C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.pdb

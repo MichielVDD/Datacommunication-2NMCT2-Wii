@@ -1,0 +1,45 @@
+﻿<Window x:Class="WiiControllerProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WiiControllerProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="349" Width="647" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="370*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="117"/>
+        <Label x:Name="label" Content="WII" HorizontalAlignment="Left" Margin="10,283,0,0" VerticalAlignment="Top" Width="117" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="27" Margin="57,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="23" Name="Up"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="27" Margin="57,46,0,0" Stroke="Black" VerticalAlignment="Top" Width="23" Name="Down"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="21" Margin="34,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="23" Name="Left"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="21" Margin="80,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="23" Name="Right"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="29" Margin="50,92,0,0" Stroke="Black" VerticalAlignment="Top" Width="37" x:Name="A"/>
+        <Label x:Name="lblA" Content="A" HorizontalAlignment="Left" Margin="50,92,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="37"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="21" Margin="80,145,0,0" Stroke="Black" VerticalAlignment="Top" Width="23" x:Name="Plus"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="21" Margin="57,145,0,0" Stroke="Black" VerticalAlignment="Top" Width="23" x:Name="Home"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="21" Margin="34,145,0,0" Stroke="Black" VerticalAlignment="Top" Width="23" x:Name="Min"/>
+        <Label Content="+" HorizontalAlignment="Left" Margin="80,142,0,0" VerticalAlignment="Top" Height="24" Width="23" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="-" HorizontalAlignment="Left" Margin="34,142,0,0" VerticalAlignment="Top" Height="24" Width="23" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="H" HorizontalAlignment="Left" Margin="57,142,0,0" VerticalAlignment="Top" Height="24" Width="23" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="28" Margin="54,216,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" x:Name="Een"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="28" Margin="54,248,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" x:Name="Twee"/>
+        <Label Content="1" HorizontalAlignment="Left" Margin="49,216,0,0" VerticalAlignment="Top" Height="28" Width="38" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="2" HorizontalAlignment="Left" Margin="50,248,0,0" VerticalAlignment="Top" Height="28" Width="38" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="299" Margin="139,11,0,0" Stroke="Black" VerticalAlignment="Top" Width="117"/>
+        <Label x:Name="label_Copy" Content="Back" HorizontalAlignment="Left" Margin="139,281,0,0" VerticalAlignment="Top" Width="117" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="49" Margin="183,69,0,0" Stroke="Black" VerticalAlignment="Top" Width="31" x:Name="B"/>
+        <Label x:Name="lblB" Content="b" HorizontalAlignment="Left" Margin="180,82,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="37"/>
+        <Label Content="LED's / Rumble" HorizontalAlignment="Left" Margin="274,12,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="LED 1" Tag="led1" HorizontalAlignment="Left" Margin="284,41,0,0" VerticalAlignment="Top" x:Name="chkLed1" Checked="LedRumble"  Unchecked="LedRumble"/>
+        <CheckBox Content="LED 2" Tag="led2" HorizontalAlignment="Left" Margin="284,61,0,0" VerticalAlignment="Top" x:Name="chkLed2" Checked="LedRumble" Unchecked="LedRumble"/>
+        <CheckBox Content="LED 3" Tag="led3" HorizontalAlignment="Left" Margin="284,81,0,0" VerticalAlignment="Top" x:Name="chkLed3" Checked="LedRumble" Unchecked="LedRumble"/>
+        <CheckBox Content="LED 4" Tag="led4" HorizontalAlignment="Left" Margin="284,101,0,0" VerticalAlignment="Top" x:Name="chkLed4" Checked="LedRumble" Unchecked="LedRumble"/>
+        <CheckBox Content="Rumble" Tag="rumble" HorizontalAlignment="Left" Margin="284,121,0,0" VerticalAlignment="Top" x:Name="chkRumble" Checked="LedRumble" Unchecked="LedRumble"/>
+        <Label Content="Battery" HorizontalAlignment="Left" Margin="410,12,0,0" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="pgbBattery" HorizontalAlignment="Left" Height="26" Margin="410,43,0,0" VerticalAlignment="Top" Width="83"/>
+        <Label x:Name="lblBattery" Content="Label" HorizontalAlignment="Left" Margin="498,43,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
