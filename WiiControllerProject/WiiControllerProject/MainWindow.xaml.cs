@@ -26,26 +26,42 @@ namespace WiiControllerProject
         public MainWindow()
         {
             InitializeComponent();
-            //Connectie openen met HID device met als vendor ID &H57E en als product ID &H306 
-            _device = HIDDevice.GetHIDDevice(0x57E, 0x306);
         }
 
         public HIDDevice _device; //WII-Controller
-        public Byte _ledRumble = 0x10; //standaard Led1 aan
+        public Byte _ledRumble = 0x10;
         bool _rumble = false; //rumble moet aanblijven bij sent status 0x15;
         bool _chkUpdate = false; //Update checkboxen
         System.Windows.Threading.DispatcherTimer statusTimer = new System.Windows.Threading.DispatcherTimer();
 
+        //Huidige accel waarde
+        private int[] _xyzAccelValue = new int[3];
+
+        //Volgorde x-y-z + nulpunt van de as
+        public int[] _xPlusCal = { 613, 504, 518, 508 }; //linkse kant naar boven
+        public int[] _yPlusCal = { 508, 608, 518, 504 }; //IR naar beneden
+        public int[] _zPlusCal = { 508, 504, 616, 518 }; //Plat op tafel 
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //StatusTimer set
-            statusTimer.Tick += new EventHandler(statusTimer_Tick);
-            statusTimer.Interval = new TimeSpan(0, 0, 0, 1);
-            statusTimer.Start();
+            //Connectie openen met HID device met als vendor ID &H57E en als product ID &H306 
+            _device = HIDDevice.GetHIDDevice(0x57E, 0x306);
 
-            FirstLed();
-            Report(0x12, new byte[2] { 0x04, 0x37 });
+            if (_device != null)
+            {
+                //StatusTimer set
+                statusTimer.Tick += new EventHandler(statusTimer_Tick);
+                statusTimer.Interval = new TimeSpan(0, 0, 0, 1);
+                statusTimer.Start();
+
+                FirstLed();
+                Report(0x12, new byte[2] { 0x04, 0x37 });
+            }
+            else
+            {
+                Console.WriteLine("Geen device gevonden");
+            }
         }
 
         private void statusTimer_Tick(object sender, EventArgs e)
@@ -68,12 +84,9 @@ namespace WiiControllerProject
             // Report ID instellen op dat voor het aansturen van de player LED's             
             report.ReportID = reportID;
             //DATA invullen
-            if (data != null)
+            for (int i = 0; i < data.Length; ++i)
             {
-                for (int i = 0; i < data.Length; ++i)
-                {
-                    report.Data[i] = data[i];
-                }
+                report.Data[i] = data[i];
             }
             //Het report versturen   
             _device.WriteReport(report);
@@ -92,7 +105,7 @@ namespace WiiControllerProject
                 {
                     case 0x20:
                         //status report
-                        double batteryInfo = report.Data[5];
+                        double batteryInfo = report.Data[5] * 0.5;
                         lblBattery.Content = batteryInfo + "%";
                         pgbBattery.Value = batteryInfo;
                         Leds(report);
@@ -100,6 +113,7 @@ namespace WiiControllerProject
                         break;
                     case 0x37:
                         GetButtons(report);
+                        Accelerometer(report);
                         break;
                 }
                 _device.ReadReport(OnReadReport);
@@ -221,8 +235,6 @@ namespace WiiControllerProject
         {
             int ledStatus = report.Data[2];
             int values = ledStatus & 0xF0;
-            int ledposition = 0x10;
-            Console.Write(values);
 
             _chkUpdate = true;
             if ((values & 0x10) == 0)
@@ -262,7 +274,7 @@ namespace WiiControllerProject
 
         private void LedRumble(object sender, RoutedEventArgs e)
         {
-            if(_chkUpdate == false)
+            if (_chkUpdate == false)
             {
                 CheckBox ch = sender as CheckBox;
                 String send = ch.Tag.ToString();
@@ -296,9 +308,54 @@ namespace WiiControllerProject
 
                 Report(0x11, new byte[] { _ledRumble });
             }
-           
+
         }
 
-        
+        private void Accelerometer(HIDReport report)
+        {
+            _xyzAccelValue[0] = ((int)report.Data[2] << 2) ^ (report.Data[0] >> 5);
+            _xyzAccelValue[1] = ((int)report.Data[3] << 2) ^ (report.Data[1] >> 5);
+            _xyzAccelValue[2] = ((int)report.Data[4] << 2) ^ (report.Data[1] >> 6);
+
+            GetNoAccelValue();
+
+            double[] controllerAccelPosition = new double[3];
+            controllerAccelPosition[0] = Math.Round((double)(_xyzAccelValue[0] - _xPlusCal[3]) / (double)(_xPlusCal[0] - _xPlusCal[3]), 7);
+            controllerAccelPosition[1] = Math.Round((double)(_xyzAccelValue[1] - _yPlusCal[3]) / (double)(_yPlusCal[1] - _yPlusCal[3]), 7);
+            controllerAccelPosition[2] = Math.Round((double)(_xyzAccelValue[2] - _zPlusCal[3]) / (double)(_zPlusCal[2] - _zPlusCal[3]), 7);
+
+            lblX.Content = controllerAccelPosition[0];
+            lblY.Content = controllerAccelPosition[1];
+            lblZ.Content = controllerAccelPosition[2];
+        }
+
+        public void GetNoAccelValue()
+        {
+             //Bereken de exacte waarde van het nulpunt op die as
+            _xPlusCal[3] = (_yPlusCal[0] + _zPlusCal[0]) / 2; //x
+            _yPlusCal[3] = (_xPlusCal[1] + _zPlusCal[1]) / 2; //y
+            _zPlusCal[3] = (_xPlusCal[2] + _yPlusCal[2]) / 2; //z
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            _zPlusCal[0] = _xyzAccelValue[0];
+            _zPlusCal[1] = _xyzAccelValue[1];
+            _zPlusCal[2] = _xyzAccelValue[2];
+        }
+
+        private void btnStap2_Click(object sender, RoutedEventArgs e)
+        {
+            _yPlusCal[0] = _xyzAccelValue[0];
+            _yPlusCal[1] = _xyzAccelValue[1];
+            _yPlusCal[2] = _xyzAccelValue[2];
+        }
+
+        private void btnStap3_Click(object sender, RoutedEventArgs e)
+        {
+            _xPlusCal[0] = _xyzAccelValue[0];
+            _xPlusCal[1] = _xyzAccelValue[1];
+            _xPlusCal[2] = _xyzAccelValue[2];
+        }
     }
 }
