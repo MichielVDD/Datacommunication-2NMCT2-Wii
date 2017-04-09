@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WiiControllerProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="349" Width="647" Loaded="Window_Loaded">
+        Title="MainWindow" Height="361.533" Width="1268.565" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="370*"/>
@@ -55,5 +55,21 @@
         <Button x:Name="btnStap1" Content="Stap 1" HorizontalAlignment="Left" Margin="421,201,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.49,1.4" Click="button_Click"/>
         <Button x:Name="btnStap2" Content="Stap 2" HorizontalAlignment="Left" Margin="421,230,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.49,1.4" Click="btnStap2_Click"/>
         <Button x:Name="btnStap3" Content="Stap 3" HorizontalAlignment="Left" Margin="421,261,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.49,1.4" Click="btnStap3_Click"/>
+        <Label Content="IR Sensor" HorizontalAlignment="Left" Margin="685,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.586,1.309"/>
+        <Label Content="IR 1" HorizontalAlignment="Left" Margin="685,64,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="753,64,0,0" VerticalAlignment="Top" x:Name="IR1X"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="825,64,0,0" VerticalAlignment="Top" x:Name="IR1Y"/>
+        <Label Content="x" HorizontalAlignment="Left" Margin="753,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="y" HorizontalAlignment="Left" Margin="825,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="IR 2" HorizontalAlignment="Left" Margin="685,95,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="753,95,0,0" VerticalAlignment="Top" x:Name="IR2X"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="825,95,0,0" VerticalAlignment="Top" x:Name="IR2Y"/>
+        <Label Content="IR 3" HorizontalAlignment="Left" Margin="685,124,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="753,124,0,0" VerticalAlignment="Top" x:Name="IR3X"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="825,124,0,0" VerticalAlignment="Top" x:Name="IR3Y"/>
+        <Label Content="IR 4" HorizontalAlignment="Left" Margin="685,155,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="753,155,0,0" VerticalAlignment="Top" x:Name="IR4X"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="825,155,0,0" VerticalAlignment="Top" x:Name="IR4Y"/>
+        <Canvas HorizontalAlignment="Left" Height="215" Margin="896,46,0,0" VerticalAlignment="Top" Width="309" x:Name="IRDraw" Background="#FFCDCBCB"/>
     </Grid>
 </Window>

@@ -56,6 +56,7 @@ namespace WiiControllerProject
                 statusTimer.Start();
 
                 FirstLed();
+                EnableConfigureIR();
                 Report(0x12, new byte[2] { 0x04, 0x37 });
             }
             else
@@ -114,6 +115,7 @@ namespace WiiControllerProject
                     case 0x37:
                         GetButtons(report);
                         Accelerometer(report);
+                        GetIRPoints(report);
                         break;
                 }
                 _device.ReadReport(OnReadReport);
@@ -313,9 +315,9 @@ namespace WiiControllerProject
 
         private void Accelerometer(HIDReport report)
         {
-            _xyzAccelValue[0] = ((int)report.Data[2] << 2) ^ (report.Data[0] >> 5);
-            _xyzAccelValue[1] = ((int)report.Data[3] << 2) ^ (report.Data[1] >> 5);
-            _xyzAccelValue[2] = ((int)report.Data[4] << 2) ^ (report.Data[1] >> 6);
+            _xyzAccelValue[0] = ((int)report.Data[2] << 2) | (report.Data[0] >> 5);
+            _xyzAccelValue[1] = ((int)report.Data[3] << 2) | (report.Data[1] >> 5);
+            _xyzAccelValue[2] = ((int)report.Data[4] << 2) | (report.Data[1] >> 6);
 
             GetNoAccelValue();
 
@@ -331,7 +333,7 @@ namespace WiiControllerProject
 
         public void GetNoAccelValue()
         {
-             //Bereken de exacte waarde van het nulpunt op die as
+            //Bereken de exacte waarde van het nulpunt op die as
             _xPlusCal[3] = (_yPlusCal[0] + _zPlusCal[0]) / 2; //x
             _yPlusCal[3] = (_xPlusCal[1] + _zPlusCal[1]) / 2; //y
             _zPlusCal[3] = (_xPlusCal[2] + _yPlusCal[2]) / 2; //z
@@ -356,6 +358,91 @@ namespace WiiControllerProject
             _xPlusCal[0] = _xyzAccelValue[0];
             _xPlusCal[1] = _xyzAccelValue[1];
             _xPlusCal[2] = _xyzAccelValue[2];
+        }
+
+        //IR
+
+        private void EnableConfigureIR()
+        {
+            Report(0x13, new byte[1] { 0x04 });
+            Report(0x1A, new byte[1] { 0x04 });
+
+            WriteData(0xB00030, new byte[1] { 0x08 });
+            WriteData(0xB00000, new byte[9] { 0x02, 0x00, 0x00, 0x71, 0x01, 0x00, 0x90, 0x00, 0x41 });
+            WriteData(0xB0001A, new byte[2] { 0x40, 0x00 });
+            WriteData(0xB00033, new byte[1] { 0x01 });
+            WriteData(0xB00030, new byte[1] { 0x08 });
+        }
+
+        private void WriteData(int address, byte[] data)
+        {
+            if ((_device != null))
+            {
+                int index = 0;
+                while (index < data.Length)
+                {
+                    // Bepaal hoeveel bytes er nog moeten verzonden worden
+                    int leftOver = data.Length - index;
+
+                    // We kunnen maximaal 16 bytes per keer verzenden dus moeten we het aantal te verzenden bytes daarop limiteren
+                    int count = (leftOver > 16 ? 16 : leftOver);
+
+                    int tempAddress = address + index;
+
+                    HIDReport report = _device.CreateReport();
+                    report.ReportID = 0x16;
+                    report.Data[0] = (byte)((tempAddress & 0x4000000) >> 0x18);
+                    report.Data[1] = (byte)((tempAddress & 0xff0000) >> 0x10);
+                    report.Data[2] = (byte)((tempAddress & 0xff00) >> 0x8);
+                    report.Data[3] = (byte)((tempAddress & 0xff));
+                    report.Data[4] = (byte)count;
+                    Buffer.BlockCopy(data, index, report.Data, 5, count);
+                    _device.WriteReport(report);
+                    index += 16;
+                }
+            }
+        }
+
+        private void GetIRPoints(HIDReport report)
+        {
+            int x1 = report.Data[5] | ((report.Data[7] & 0x30 ) << 4);
+            int x2 = report.Data[8] | ((report.Data[7] & 0x03) << 8);
+            int x3 = report.Data[10] | ((report.Data[12] & 0x30) << 4);
+            int x4 = report.Data[13] | ((report.Data[12] & 0x03) << 8);
+
+            int y1 = report.Data[6] | ((report.Data[7] & 0xC0) << 2);
+            int y2 = report.Data[9] | ((report.Data[7] & 0x0C) << 6);
+            int y3 = report.Data[11] | ((report.Data[12] & 0xC0) << 2);
+            int y4 = report.Data[14] | ((report.Data[12] & 0x0C) << 6);
+
+            IR2X.Content = x2.ToString();
+            IR2Y.Content = y2.ToString();
+
+            IR3X.Content = x3.ToString();
+            IR3Y.Content = y3.ToString();
+
+            IR4X.Content = x4.ToString();
+            IR4Y.Content = y4.ToString();
+
+            if(y1 < 710 & x1 > 10)
+            {
+                //IRDraw.Children.Clear();
+                System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
+                rect.Stroke = new SolidColorBrush(Colors.Blue);
+                rect.Fill = new SolidColorBrush(Colors.Blue);
+                rect.Width = 5;
+                rect.Height = 5;
+                rect.StrokeThickness = 2;
+
+                Canvas.SetLeft(rect, 309 - ((x1 / 10) * 3));
+                Canvas.SetTop(rect, ((y1) / 10) * 3);
+
+                IRDraw.Children.Add(rect);
+
+                IR1X.Content = x1.ToString();
+                IR1Y.Content = y1.ToString();
+
+            }
         }
     }
 }
