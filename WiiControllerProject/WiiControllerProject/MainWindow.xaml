@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WiiControllerProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="361.533" Width="1268.565" Loaded="Window_Loaded">
+        Title="MainWindow" Height="345.547" Width="1543.308" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="370*"/>
@@ -32,44 +32,51 @@
         <Label x:Name="label_Copy" Content="Back" HorizontalAlignment="Left" Margin="139,281,0,0" VerticalAlignment="Top" Width="117" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Rectangle Fill="#FFEDEDF5" HorizontalAlignment="Left" Height="49" Margin="183,69,0,0" Stroke="Black" VerticalAlignment="Top" Width="31" x:Name="B"/>
         <Label x:Name="lblB" Content="b" HorizontalAlignment="Left" Margin="180,82,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="37"/>
-        <Label Content="LED's / Rumble" HorizontalAlignment="Left" Margin="274,12,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="LED 1" Tag="led1" HorizontalAlignment="Left" Margin="284,41,0,0" VerticalAlignment="Top" x:Name="chkLed1" Checked="LedRumble"  Unchecked="LedRumble"/>
-        <CheckBox Content="LED 2" Tag="led2" HorizontalAlignment="Left" Margin="284,61,0,0" VerticalAlignment="Top" x:Name="chkLed2" Checked="LedRumble" Unchecked="LedRumble"/>
-        <CheckBox Content="LED 3" Tag="led3" HorizontalAlignment="Left" Margin="284,81,0,0" VerticalAlignment="Top" x:Name="chkLed3" Checked="LedRumble" Unchecked="LedRumble"/>
-        <CheckBox Content="LED 4" Tag="led4" HorizontalAlignment="Left" Margin="284,101,0,0" VerticalAlignment="Top" x:Name="chkLed4" Checked="LedRumble" Unchecked="LedRumble"/>
-        <CheckBox Content="Rumble" Tag="rumble" HorizontalAlignment="Left" Margin="284,121,0,0" VerticalAlignment="Top" x:Name="chkRumble" Checked="LedRumble" Unchecked="LedRumble"/>
-        <Label Content="Accelerometer" HorizontalAlignment="Left" Margin="498,170,0,0" VerticalAlignment="Top"/>
-        <Label Content="X" HorizontalAlignment="Left" Margin="508,196,0,0" VerticalAlignment="Top"/>
-        <Label Content="Y" HorizontalAlignment="Left" Margin="508,227,0,0" VerticalAlignment="Top"/>
-        <Label Content="Z" HorizontalAlignment="Left" Margin="508,258,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblX" Content="Label" HorizontalAlignment="Left" Margin="550,196,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblY" Content="Label" HorizontalAlignment="Left" Margin="550,227,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblZ" Content="Label" HorizontalAlignment="Left" Margin="550,258,0,0" VerticalAlignment="Top"/>
-        <Label Content="Battery" HorizontalAlignment="Left" Margin="490,15,0,0" VerticalAlignment="Top"/>
-        <ProgressBar x:Name="pgbBattery" HorizontalAlignment="Left" Height="26" Margin="490,46,0,0" VerticalAlignment="Top" Width="83"/>
-        <Label x:Name="lblBattery" Content="Label" HorizontalAlignment="Left" Margin="578,46,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Calibrate wii remote" HorizontalAlignment="Left" Margin="274,170,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="A naar boven" HorizontalAlignment="Left" Margin="284,196,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="IR naar beneden" HorizontalAlignment="Left" Margin="284,227,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label4" Content="Linkse kant naar boven" HorizontalAlignment="Left" Margin="284,258,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnStap1" Content="Stap 1" HorizontalAlignment="Left" Margin="421,201,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.49,1.4" Click="button_Click"/>
-        <Button x:Name="btnStap2" Content="Stap 2" HorizontalAlignment="Left" Margin="421,230,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.49,1.4" Click="btnStap2_Click"/>
-        <Button x:Name="btnStap3" Content="Stap 3" HorizontalAlignment="Left" Margin="421,261,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.49,1.4" Click="btnStap3_Click"/>
-        <Label Content="IR Sensor" HorizontalAlignment="Left" Margin="685,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.586,1.309"/>
-        <Label Content="IR 1" HorizontalAlignment="Left" Margin="685,64,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="753,64,0,0" VerticalAlignment="Top" x:Name="IR1X"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="825,64,0,0" VerticalAlignment="Top" x:Name="IR1Y"/>
-        <Label Content="x" HorizontalAlignment="Left" Margin="753,41,0,0" VerticalAlignment="Top"/>
-        <Label Content="y" HorizontalAlignment="Left" Margin="825,41,0,0" VerticalAlignment="Top"/>
-        <Label Content="IR 2" HorizontalAlignment="Left" Margin="685,95,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="753,95,0,0" VerticalAlignment="Top" x:Name="IR2X"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="825,95,0,0" VerticalAlignment="Top" x:Name="IR2Y"/>
-        <Label Content="IR 3" HorizontalAlignment="Left" Margin="685,124,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="753,124,0,0" VerticalAlignment="Top" x:Name="IR3X"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="825,124,0,0" VerticalAlignment="Top" x:Name="IR3Y"/>
-        <Label Content="IR 4" HorizontalAlignment="Left" Margin="685,155,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="753,155,0,0" VerticalAlignment="Top" x:Name="IR4X"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="825,155,0,0" VerticalAlignment="Top" x:Name="IR4Y"/>
-        <Canvas HorizontalAlignment="Left" Height="215" Margin="896,46,0,0" VerticalAlignment="Top" Width="309" x:Name="IRDraw" Background="#FFCDCBCB"/>
+        <Label Content="LED's / Rumble" HorizontalAlignment="Left" Margin="290,182,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="LED 1" Tag="led1" HorizontalAlignment="Left" Margin="300,211,0,0" VerticalAlignment="Top" x:Name="chkLed1" Checked="LedRumble"  Unchecked="LedRumble"/>
+        <CheckBox Content="LED 2" Tag="led2" HorizontalAlignment="Left" Margin="300,231,0,0" VerticalAlignment="Top" x:Name="chkLed2" Checked="LedRumble" Unchecked="LedRumble"/>
+        <CheckBox Content="LED 3" Tag="led3" HorizontalAlignment="Left" Margin="300,251,0,0" VerticalAlignment="Top" x:Name="chkLed3" Checked="LedRumble" Unchecked="LedRumble"/>
+        <CheckBox Content="LED 4" Tag="led4" HorizontalAlignment="Left" Margin="300,271,0,0" VerticalAlignment="Top" x:Name="chkLed4" Checked="LedRumble" Unchecked="LedRumble"/>
+        <CheckBox Content="Rumble" Tag="rumble" HorizontalAlignment="Left" Margin="300,291,0,0" VerticalAlignment="Top" x:Name="chkRumble" Checked="LedRumble" Unchecked="LedRumble"/>
+        <Label Content="Accelerometer" HorizontalAlignment="Left" Margin="510,22,0,0" VerticalAlignment="Top"/>
+        <Label Content="X" HorizontalAlignment="Left" Margin="520,48,0,0" VerticalAlignment="Top"/>
+        <Label Content="Y" HorizontalAlignment="Left" Margin="520,79,0,0" VerticalAlignment="Top"/>
+        <Label Content="Z" HorizontalAlignment="Left" Margin="520,110,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblX" Content="Label" HorizontalAlignment="Left" Margin="562,48,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblY" Content="Label" HorizontalAlignment="Left" Margin="562,79,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblZ" Content="Label" HorizontalAlignment="Left" Margin="562,110,0,0" VerticalAlignment="Top"/>
+        <Label Content="Battery" HorizontalAlignment="Left" Margin="506,185,0,0" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="pgbBattery" HorizontalAlignment="Left" Height="26" Margin="506,216,0,0" VerticalAlignment="Top" Width="83"/>
+        <Label x:Name="lblBattery" Content="Label" HorizontalAlignment="Left" Margin="594,216,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Calibrate wii remote" HorizontalAlignment="Left" Margin="286,22,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="A naar boven" HorizontalAlignment="Left" Margin="296,48,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="IR naar beneden" HorizontalAlignment="Left" Margin="296,79,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label4" Content="Linkse kant naar boven" HorizontalAlignment="Left" Margin="296,110,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnStap1" Content="Stap 1" HorizontalAlignment="Left" Margin="433,53,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.49,1.4" Click="button_Click"/>
+        <Button x:Name="btnStap2" Content="Stap 2" HorizontalAlignment="Left" Margin="433,82,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.49,1.4" Click="btnStap2_Click"/>
+        <Button x:Name="btnStap3" Content="Stap 3" HorizontalAlignment="Left" Margin="433,113,0,0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.49,1.4" Click="btnStap3_Click"/>
+        <Label Content="IR Sensor" HorizontalAlignment="Left" Margin="981,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.586,1.309"/>
+        <Label Content="IR 1" HorizontalAlignment="Left" Margin="981,64,0,0" VerticalAlignment="Top"/>
+        <Label Content="1023" HorizontalAlignment="Left" Margin="1049,64,0,0" VerticalAlignment="Top" x:Name="IR1X"/>
+        <Label Content="1023" HorizontalAlignment="Left" Margin="1121,64,0,0" VerticalAlignment="Top" x:Name="IR1Y"/>
+        <Label Content="x" HorizontalAlignment="Left" Margin="1049,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="y" HorizontalAlignment="Left" Margin="1121,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="IR 2" HorizontalAlignment="Left" Margin="981,95,0,0" VerticalAlignment="Top"/>
+        <Label Content="1023" HorizontalAlignment="Left" Margin="1049,95,0,0" VerticalAlignment="Top" x:Name="IR2X"/>
+        <Label Content="1023" HorizontalAlignment="Left" Margin="1121,95,0,0" VerticalAlignment="Top" x:Name="IR2Y"/>
+        <Label Content="IR 3" HorizontalAlignment="Left" Margin="981,124,0,0" VerticalAlignment="Top"/>
+        <Label Content="1023" HorizontalAlignment="Left" Margin="1049,124,0,0" VerticalAlignment="Top" x:Name="IR3X"/>
+        <Label Content="1023" HorizontalAlignment="Left" Margin="1121,124,0,0" VerticalAlignment="Top" x:Name="IR3Y"/>
+        <Label Content="IR 4" HorizontalAlignment="Left" Margin="981,155,0,0" VerticalAlignment="Top"/>
+        <Label Content="1023" HorizontalAlignment="Left" Margin="1049,155,0,0" VerticalAlignment="Top" x:Name="IR4X"/>
+        <Label Content="1023" HorizontalAlignment="Left" Margin="1121,155,0,0" VerticalAlignment="Top" x:Name="IR4Y"/>
+        <Canvas HorizontalAlignment="Left" Height="215" Margin="1192,46,0,0" VerticalAlignment="Top" Width="309" x:Name="IRDraw" Background="#FFCDCBCB"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="162" VerticalAlignment="Top" Width="274" Margin="650,19,0,0" Source="asset/wii.png"/>
+        <Label x:Name="lblXPlus" Content="+X" HorizontalAlignment="Left" Margin="736,32,0,0" VerticalAlignment="Top" Height="35" Width="26" Background="White" Foreground="Red"/>
+        <Label x:Name="lblXMin" Content="-X" HorizontalAlignment="Left" Margin="820,124,0,0" VerticalAlignment="Top" Height="35" Width="23" Foreground="Red"/>
+        <Label x:Name="lblZPlus" Content="+Z" HorizontalAlignment="Left" Margin="773,10,0,0" VerticalAlignment="Top" Foreground="Lime"/>
+        <Label x:Name="lblZMin" Content="-Z" HorizontalAlignment="Left" Margin="776,145,0,0" VerticalAlignment="Top" Foreground="Lime"/>
+        <Label x:Name="lblYPlus" Content="+Y" HorizontalAlignment="Left" Margin="673,127,0,0" VerticalAlignment="Top" Foreground="Blue"/>
+        <Label x:Name="lblYMin" Content="-Y" HorizontalAlignment="Left" Margin="885,23,0,0" VerticalAlignment="Top" Foreground="Blue"/>
     </Grid>
 </Window>

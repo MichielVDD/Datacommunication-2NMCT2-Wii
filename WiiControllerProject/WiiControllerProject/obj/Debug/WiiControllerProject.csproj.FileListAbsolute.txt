@@ -16,7 +16,6 @@ C:\DataCom\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProj
 F:\WiiControllerProject\WiiControllerProject\bin\Debug\WiiControllerProject.exe.config
 F:\WiiControllerProject\WiiControllerProject\bin\Debug\WiiControllerProject.exe
 F:\WiiControllerProject\WiiControllerProject\bin\Debug\WiiControllerProject.pdb
-F:\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.csprojResolveAssemblyReference.cache
 F:\WiiControllerProject\WiiControllerProject\obj\Debug\MainWindow.g.cs
 F:\WiiControllerProject\WiiControllerProject\obj\Debug\App.g.cs
 F:\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject_MarkupCompile.cache
@@ -27,3 +26,4 @@ F:\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.Prop
 F:\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.csproj.GenerateResource.Cache
 F:\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.exe
 F:\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.pdb
+F:\WiiControllerProject\WiiControllerProject\obj\Debug\WiiControllerProject.csprojResolveAssemblyReference.cache

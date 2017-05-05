@@ -50,14 +50,15 @@ namespace WiiControllerProject
 
             if (_device != null)
             {
+                EnableConfigureIR();
+                FirstLed();
+                Report(0x12, new byte[2] { 0x04, 0x37 });
+
                 //StatusTimer set
                 statusTimer.Tick += new EventHandler(statusTimer_Tick);
                 statusTimer.Interval = new TimeSpan(0, 0, 0, 1);
                 statusTimer.Start();
 
-                FirstLed();
-                EnableConfigureIR();
-                Report(0x12, new byte[2] { 0x04, 0x37 });
             }
             else
             {
@@ -112,6 +113,7 @@ namespace WiiControllerProject
                         Leds(report);
 
                         break;
+                    //Alle data terug van report. Buttons/IR/Accel
                     case 0x37:
                         GetButtons(report);
                         Accelerometer(report);
@@ -329,6 +331,38 @@ namespace WiiControllerProject
             lblX.Content = controllerAccelPosition[0];
             lblY.Content = controllerAccelPosition[1];
             lblZ.Content = controllerAccelPosition[2];
+
+            //Aantonen beweging op image
+            if (controllerAccelPosition[0] >= 0)
+            {
+                lblXPlus.Visibility = Visibility.Visible;
+                lblXMin.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lblXPlus.Visibility = Visibility.Hidden;
+                lblXMin.Visibility = Visibility.Visible;
+            }
+            if (controllerAccelPosition[1] >= 0)
+            {
+                lblYPlus.Visibility = Visibility.Visible;
+                lblYMin.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lblYPlus.Visibility = Visibility.Hidden;
+                lblYMin.Visibility = Visibility.Visible;
+            }
+            if (controllerAccelPosition[2] >= 0)
+            {
+                lblZPlus.Visibility = Visibility.Visible;
+                lblZMin.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lblZPlus.Visibility = Visibility.Hidden;
+                lblZMin.Visibility = Visibility.Visible;
+            }
         }
 
         public void GetNoAccelValue()
@@ -367,11 +401,11 @@ namespace WiiControllerProject
             Report(0x13, new byte[1] { 0x04 });
             Report(0x1A, new byte[1] { 0x04 });
 
-            WriteData(0xB00030, new byte[1] { 0x08 });
-            WriteData(0xB00000, new byte[9] { 0x02, 0x00, 0x00, 0x71, 0x01, 0x00, 0x90, 0x00, 0x41 });
-            WriteData(0xB0001A, new byte[2] { 0x40, 0x00 });
-            WriteData(0xB00033, new byte[1] { 0x01 });
-            WriteData(0xB00030, new byte[1] { 0x08 });
+            WriteData(0x04b00030, new byte[1] { 0x08 });
+            WriteData(0x04b00000, new byte[9] { 0x02, 0x00, 0x00, 0x71, 0x01, 0x00, 0xaa, 0x00, 0x64 });
+            WriteData(0x04b0001a, new byte[2] { 0x63, 0x03 });
+            WriteData(0x04b00033, new byte[1] { 0x08 });
+            WriteData(0x04b00030, new byte[1] { 0x08 });
         }
 
         private void WriteData(int address, byte[] data)
@@ -381,17 +415,13 @@ namespace WiiControllerProject
                 int index = 0;
                 while (index < data.Length)
                 {
-                    // Bepaal hoeveel bytes er nog moeten verzonden worden
+                    // Bepaal hoeveel bytes er nog moeten verzonden worden                     
                     int leftOver = data.Length - index;
-
-                    // We kunnen maximaal 16 bytes per keer verzenden dus moeten we het aantal te verzenden bytes daarop limiteren
-                    int count = (leftOver > 16 ? 16 : leftOver);
-
+                    // We kunnen maximaal 16 bytes per keer verzenden dus moeten we het aantal te verzenden bytes daarop limiteren                     
+                    int count = (leftOver > 16 ? 16 : leftOver); 
                     int tempAddress = address + index;
-
                     HIDReport report = _device.CreateReport();
-                    report.ReportID = 0x16;
-                    report.Data[0] = (byte)((tempAddress & 0x4000000) >> 0x18);
+                    report.ReportID = 0x16; report.Data[0] = (byte)((tempAddress & 0x4000000) >> 0x18);
                     report.Data[1] = (byte)((tempAddress & 0xff0000) >> 0x10);
                     report.Data[2] = (byte)((tempAddress & 0xff00) >> 0x8);
                     report.Data[3] = (byte)((tempAddress & 0xff));
@@ -415,32 +445,49 @@ namespace WiiControllerProject
             int y3 = report.Data[11] | ((report.Data[12] & 0xC0) << 2);
             int y4 = report.Data[14] | ((report.Data[12] & 0x0C) << 6);
 
-            IR2X.Content = x2.ToString();
-            IR2Y.Content = y2.ToString();
+            IRDraw.Children.Clear();
+            
+            DrawIRPoints(x1, y1, 1);
+            DrawIRPoints(x2, y2, 2);
+            DrawIRPoints(x3, y3, 3);
+            DrawIRPoints(x4, y4, 4);
+        }
 
-            IR3X.Content = x3.ToString();
-            IR3Y.Content = y3.ToString();
-
-            IR4X.Content = x4.ToString();
-            IR4Y.Content = y4.ToString();
-
-            if(y1 < 710 & x1 > 10)
+        private void DrawIRPoints(int x, int y, int irP)
+        {
+            if (y < 710 & x > 10 & x < 1023 & y > 15)
             {
-                //IRDraw.Children.Clear();
-                System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
+
+                Rectangle rect = new Rectangle();
                 rect.Stroke = new SolidColorBrush(Colors.Blue);
                 rect.Fill = new SolidColorBrush(Colors.Blue);
                 rect.Width = 5;
                 rect.Height = 5;
                 rect.StrokeThickness = 2;
 
-                Canvas.SetLeft(rect, 309 - ((x1 / 10) * 3));
-                Canvas.SetTop(rect, ((y1) / 10) * 3);
+                Canvas.SetLeft(rect, 309 - ((x / 10) * 3));
+                Canvas.SetTop(rect, ((y) / 10) * 3);
 
                 IRDraw.Children.Add(rect);
 
-                IR1X.Content = x1.ToString();
-                IR1Y.Content = y1.ToString();
+                if(irP == 1)
+                {
+                    IR1X.Content = x.ToString();
+                    IR1Y.Content = y.ToString();
+                }else if(irP == 2)
+                {
+                    IR2X.Content = x.ToString();
+                    IR2Y.Content = y.ToString();
+                }
+                else if(irP == 3)
+                {
+                    IR3X.Content = x.ToString();
+                    IR3Y.Content = y.ToString();
+                }else if(irP == 4)
+                {
+                    IR4X.Content = x.ToString();
+                    IR4Y.Content = y.ToString();
+                }
 
             }
         }

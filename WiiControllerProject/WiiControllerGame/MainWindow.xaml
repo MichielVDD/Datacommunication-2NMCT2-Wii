@@ -1,0 +1,27 @@
+﻿<Window x:Class="WiiControllerGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WiiControllerGame"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="912" Width="1436.5">
+    <Grid>
+        <Canvas x:Name="gameDraw" HorizontalAlignment="Left" Height="767" Margin="403,10,0,0" VerticalAlignment="Top" Width="1015" Background="#FFECECEC"/>
+        <Canvas x:Name="cursorDraw" HorizontalAlignment="Left" Height="767" Margin="403,10,0,0" VerticalAlignment="Top" Width="1015"/>
+        <Button x:Name="btnStart" Content="Start Game" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="388" Height="125" FontSize="48" Click="btnStart_Click"/>
+        <TextBlock x:Name="txbScore" HorizontalAlignment="Left" Margin="403,807,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="48" Width="388" TextAlignment="Center"/>
+        <TextBlock x:Name="txbLevens" HorizontalAlignment="Left" Margin="684,807,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" FontSize="48" Foreground="Red" Width="388" TextAlignment="Center"/>
+        <Label x:Name="label" Content="Score:" FontSize="48" HorizontalAlignment="Left" Margin="403,797,0,0" VerticalAlignment="Top" Width="144"/>
+        <Label x:Name="label_Copy" Content="Levens:" FontSize="48" HorizontalAlignment="Left" Margin="684,797,0,0" VerticalAlignment="Top" Width="161"/>
+        <TextBlock x:Name="txbResultaat" HorizontalAlignment="Left" Margin="1038,807,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Width="388" TextAlignment="Center"/>
+        <TextBox x:Name="txtName" FontSize="40" HorizontalAlignment="Left" Height="69" Margin="224,149,0,0" TextWrapping="Wrap" Text="Speler" VerticalAlignment="Top" Width="174" Background="White" Foreground="#FFB0AEAE"/>
+        <ListBox x:Name="lstScores" HorizontalAlignment="Left" Height="377" Margin="10,400,0,0" VerticalAlignment="Top" Width="388"/>
+        <Label x:Name="label1" Content="Vorige Uitslagen:" HorizontalAlignment="Left" Margin="10,326,0,0" VerticalAlignment="Top" FontSize="48" Width="388"/>
+        <TextBlock x:Name="txbCountdown" HorizontalAlignment="Left" Margin="398,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="439" Width="1028" FontSize="300" TextAlignment="Center"/>
+        <TextBox x:Name="txtScore" FontSize="40" Foreground="#FFB0AEAE" HorizontalAlignment="Left" Height="63" Margin="224,244,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="174"/>
+        <Label x:Name="lblSpelerNaam" Content="Naam:" FontSize="40" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="144" Height="69"/>
+        <Label x:Name="lblScoreMax" Content="Max Score:" FontSize="40" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Width="214" Height="63"/>
+
+    </Grid>
+</Window>
